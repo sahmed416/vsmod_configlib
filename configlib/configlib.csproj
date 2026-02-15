@@ -2,7 +2,7 @@
   <!-- Mod info -->
   <PropertyGroup>
     <ModName>Config lib</ModName>
-    <ModVersion>1.10.11</ModVersion>
+    <ModVersion>1.11.0</ModVersion>
     <Version>1.10.0</Version>
     <ModId>configlib</ModId>
     <Description>A universal place to configure your mods. Makes it possible for content mods to have configs too.</Description>
@@ -19,12 +19,12 @@
 
   <!-- Dependencies -->
   <ItemGroup>
-    <Dependencies Include="vsimgui" Version="1.1.12" />
+    <Dependencies Include="vsimgui" Version="1.2.0" />
   </ItemGroup>
 
   <!-- Project settings -->
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <ImplicitUsings>enable</ImplicitUsings>

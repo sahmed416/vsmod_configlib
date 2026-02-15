@@ -1,6 +1,7 @@
 ﻿using ConfigLib.Formatting;
 using ImGuiNET;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.Globalization;
 using System.Numerics;
 using Vintagestory.API.Client;
@@ -697,10 +698,15 @@ internal class ConfigWindow
     private static void StepFloat(ref float value, float? min, float? max, float? step)
     {
         if (step == null || step == 0) return;
+
+        float prev = value;
+        
         float stepValue = step.Value;
         float stepPoint = min ?? max ?? 0;
 
         value = MathF.Round((value - stepPoint) / stepValue) * stepValue + stepPoint;
+
+        if (value != prev) Debug.WriteLine($"{prev} => {value} ([{min}, {max}] at {step})");
     }
 
     private void DrawIntegerSetting(string name, ConfigSetting setting)
