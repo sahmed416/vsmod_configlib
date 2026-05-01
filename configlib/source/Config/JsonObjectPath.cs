@@ -173,17 +173,33 @@ internal sealed class JsonObjectPath
 
     private static PathElementDelegate? TryParseRange(string element)
     {
-        if (!element.Contains("-")) return null;
+        if (element.Contains('-'))
+        {
+            string[] indexes = element.Split('-');
+            if (indexes.Length != 2) return null;
 
-        string[] indexes = element.Split("-");
-        if (indexes.Length != 2) return null;
+            bool parsedStart = int.TryParse(indexes[0], out int start);
+            bool parsedEnd = int.TryParse(indexes[1], out int end);
 
-        bool parsedStart = int.TryParse(indexes[0], out int start);
-        bool parsedEnd = int.TryParse(indexes[1], out int end);
+            if (!parsedStart || !parsedEnd) return null;
 
-        if (!parsedStart || !parsedEnd) return null;
+            return tree => PathElementByIndexes(tree, start, end);
+        }
 
-        return tree => PathElementByIndexes(tree, start, end);
+        if (element.Contains(".."))
+        {
+            string[] indexes = element.Split("..");
+            if (indexes.Length != 2) return null;
+
+            bool parsedStart = int.TryParse(indexes[0], out int start);
+            bool parsedEnd = int.TryParse(indexes[1], out int end);
+
+            if (!parsedStart || !parsedEnd) return null;
+
+            return tree => PathElementByIndexes(tree, start, end + 1);
+        }
+
+        return null;
     }
     private static PathElementDelegate? TryParseWildcard(string element)
     {
