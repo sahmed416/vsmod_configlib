@@ -178,4 +178,4 @@
     <Delete Files="$(ReleasePath)" />
     <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ReleasePath)" />
   </Target>
-</Project>
+</Project>
